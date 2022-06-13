@@ -8,28 +8,58 @@
     <artifactId>blink-customersink-3.x</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+<!--        <blink.version>blink-3.3.0</blink.version>-->
+        <blink.version>blink-3.2.1-SNAPSHOT</blink.version>
+<!--        <blink.version>blink-3.3.0-SNAPSHOT</blink.version>-->
+    </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.apache.flink</groupId>
+            <groupId>com.alibaba.blink</groupId>
             <artifactId>flink-table_2.11</artifactId>
-            <version>blink-3.2.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/flink-table_2.11-blink-3.2.1-SNAPSHOT.jar</systemPath>
+            <version>blink-3.3.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.alibaba.blink</groupId>
             <artifactId>blink-connector-common</artifactId>
-            <version>blink-3.2.1-SNAPSHOT</version>
+            <version>blink-3.3.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.blink</groupId>
+            <artifactId>blink-connector-custom</artifactId>
+            <version>blink-3.3.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table_2.11</artifactId>
+            <version>${blink.version}</version>
+            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/flink-table_2.11-blink-3.2.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        -->
+        <!--
+        <dependency>
+            <groupId>com.alibaba.blink</groupId>
+            <artifactId>blink-connector-common</artifactId>
+            <version>${blink.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/blink-connector-common-blink-3.2.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.alibaba.blink</groupId>
             <artifactId>blink-connector-custom</artifactId>
-            <version>blink-3.2.1-SNAPSHOT</version>
+            <version>${blink.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/blink-connector-custom-blink-3.2.1.jar</systemPath>
         </dependency>
+        -->
         <dependency>
             <groupId>org.log4j</groupId>
             <artifactId>slf4j-parent</artifactId>
@@ -65,8 +95,20 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/kmonitor-client-1.1.5.jar</systemPath>
         </dependency>
-    </dependencies>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.3</version>
+        </dependency>
 
+    </dependencies>
 
     <build>
         <plugins>
@@ -102,5 +144,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>allow-snapshots</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <repositories>
+                <repository>
+                    <id>snapshots-repo</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <releases><enabled>false</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 
 </project>
