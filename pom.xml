@@ -6,7 +6,7 @@
 
     <groupId>com.alibaba.blink.customersink</groupId>
     <artifactId>blink-customersink-3.x</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <blink.version>blink-3.3.0-SNAPSHOT</blink.version>
